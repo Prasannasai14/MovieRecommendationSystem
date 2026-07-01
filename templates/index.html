@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommendation System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a2e;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        .recommendations {
+            margin-top: 30px;
+        }
+        .movie-card {
+            background-color: #16213e;
+            padding: 15px;
+            margin: 10px auto;
+            width: 300px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎬 Movie Recommendation System</h1>
+    
+    <form method="POST">
+        <select name="movie" required>
+            <option value="">-- Select a Movie --</option>
+            {% for movie in movies %}
+                <option value="{{ movie }}"{% if movie == selected_movie %}selected{% endif %}>{{ movie }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if recommendations %}
+        <div class="recommendations">
+            <h2>Because you liked "{{ selected_movie }}", you might enjoy:</h2>
+            {% for movie in recommendations %}
+                <div class="movie-card">{{ movie }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</body>
+</html>
